@@ -4,6 +4,79 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <style>
+      #container {
+        width: 540px;
+        height: 100vh;
+        border: 1px solid;
+        margin: auto;
+      }
+
+      div {
+        border: 1px solid;
+        margin: 5px;
+      }
+
+      #score {
+        height: 50px;
+      }
+
+      #description {
+        height: 100px;
+      }
+
+      #dzk_image {
+        height: 200px;
+      }
+
+      #questions {
+        height: 250px;
+      }
+
+      #retry {
+        height: 50px;
+        position: relative;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+      }
+
+      .quiz-container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(5, 1fr);
+        gap: 10px;
+      }
+    </style>
   </head>
-  <body></body>
+  <body>
+    <div id="container">
+      <div id="score"></div>
+      <div id="description"></div>
+      <div id="dzk_image"></div>
+      <div id="questions">
+        <div>들어간 재료들</div>
+        <!-- 문제 10개 -->
+        <div class="quiz-container">
+          <div class="quiz-item">1</div>
+          <div class="quiz-item">2</div>
+          <div class="quiz-item">3</div>
+          <div class="quiz-item">4</div>
+          <div class="quiz-item">5</div>
+          <div class="quiz-item">6</div>
+          <div class="quiz-item">7</div>
+          <div class="quiz-item">8</div>
+          <div class="quiz-item">9</div>
+          <div class="quiz-item">10</div>
+        </div>
+      </div>
+      <div id="retry">
+        <div>[아이콘]</div>
+        <div>다시 도전하기</div>
+      </div>
+    </div>
+  </body>
 </html>
