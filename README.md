@@ -1,1 +1,3 @@
-# cs-doojzonku
+# 팡쫀쿠(FAANG_JZONKU)
+
+- 게시
