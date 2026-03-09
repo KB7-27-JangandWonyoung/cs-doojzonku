@@ -1,1 +1,187 @@
 /* 게임 페이지 전용 */
+
+body {
+  background-color: #f7f6d3;
+  margin: 0; /* 브라우저 기본 여백 제거 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 2. 가로 540px 고정 모바일 뷰 컨테이너 */
+.mobile-container {
+  width: 540px;
+  height: 100vh;
+  background-color: #fffee4;
+  display: flex;
+  flex-direction: column; /* 내부 요소들을 위에서 아래로(세로) 쌓음 */
+  position: relative; /* 자식 요소 중 absolute 배치가 있을 경우 기준점이 됨 */
+  overflow-y: auto; /* 내용이 화면보다 길어지면 세로 스크롤 생성 */
+}
+.mobile-container::-webkit-scrollbar {
+  display: none; /* 스크롤바 영역 자체를 보이지 않게 설정 */
+}
+
+/* 3. 상단 정보 표시 영역 (재료 정보, 타이머) */
+.quiz-header {
+  display: flex; /* 정보 박스들을 가로로 배치 */
+  height: 80px;
+  justify-content: space-between; /* 양 끝으로 벌려서 배치 (왼쪽: 재료, 오른쪽: 시간) */
+  margin-bottom: 20px;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-top: 30px;
+}
+
+/* 4. 헤더 안의 개별 갈색 박스 */
+.info-box {
+  background-color: #5d4007;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 20px;
+  display: flex; /* 아이콘과 텍스트를 가로로 배치 */
+  align-items: center; /* 아이콘과 텍스트의 세로 중앙 정렬 */
+  gap: 10px; /* 아이콘과 텍스트 사이의 간격 */
+  font-size: 0.9rem; /* 글자 크기 살짝 작게 */
+}
+
+/* 3. 퀴즈 진행 상태 */
+.progress-section {
+  width: auto;
+  height: 90px;
+  background-color: #fceff5;
+  margin-left: 20px;
+  margin-right: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 10px;
+  border-radius: 10px;
+}
+/* 3. 퀴즈 진행 상태 프로그래스바 */
+.progress-bar-container {
+  height: 15px;
+  background-color: #f39eb6;
+  border-radius: 30px;
+}
+/* 3. 퀴즈 진행 상태 프로그래스바 채움 */
+.progress-fill {
+  background-color: #ff7098;
+  height: 100%;
+  width: 60%;
+  border-radius: 30px;
+}
+
+/* 3. 퀴즈 진행 상태 아이콘 */
+.item-icons {
+  display: flex;
+  height: 30px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  justify-content: space-between;
+  background-color: #5d4007;
+}
+
+/* 3. 재료 그림 배경 */
+.visual-section {
+  width: 100%;
+  aspect-ratio: 540 / 300;
+  position: relative; /* 내부 요소 배치를 위한 기준점 */
+
+  /* 배경 이미지 설정 */
+  background-image: url('../asset/bg_quiz.png');
+  background-size: cover; /* 배경을 빈틈없이 꽉 채움 */
+  background-repeat: no-repeat;
+  background-position: center; /* 이미지의 중심을 기준으로 채움 */
+
+  /* 내부 요소(캐릭터, 상품) 정렬 */
+  display: flex;
+  justify-content: space-around; /* 캐릭터와 상품을 좌우로 배치 */
+  align-items: center; /* 세로 중앙 정렬 */
+  box-sizing: border-box; /* 패딩이 너비에 포함되도록 설정 */
+
+  /* 요소들이 배경보다 위에 오도록 보장 */
+  z-index: 1;
+  margin-top: 20px;
+}
+
+.character-circle img,
+.product-image img {
+  width: 120px;
+  height: auto;
+}
+
+/* 5. 퀴즈  */
+.quiz-content {
+  padding: 30px 25px;
+  margin-top: 20px; /* 시각 섹션과 살짝 겹치게 하여 부드럽게 연결 */
+  z-index: 2;
+  position: relative;
+}
+
+/* 뱃지 (초록색 </> JavaScript) */
+.badge {
+  display: inline-block;
+  background-color: #32cd32; /* 선명한 초록색 */
+  color: white;
+  padding: 5px 15px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+/* 질문 텍스트 */
+.question {
+  font-size: 22px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20px;
+  line-height: 1.4;
+}
+
+/* 코드 박스 (연분홍 배경) */
+.code-box {
+  background-color: #fff0f5; /* 아주 연한 분홍색 */
+  padding: 20px;
+  border-radius: 20px;
+  border: 1px solid #ffdae9;
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+.code-box code {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 18px;
+  color: #333;
+}
+
+/* 6. 퀴즈 선택지(답안) 스타일 */
+.option-item {
+  display: block; /* 세로로 한 줄씩 차지 */
+  height: 50px; /* 선택지 높이 고정 */
+  background: #ff769b;
+  margin-bottom: 10px;
+  border-radius: 25px;
+}
+
+/* 7. 정답일 경우의 스타일 (클래스 추가 시 적용) */
+.option-item.correct {
+  background: #d4edda;
+  border: 2px solid #28a745;
+}
+
+/* 8. 하단 정답 확인 버튼 */
+#check-btn {
+  width: 100%; 
+  height: 60px;
+  background-color: #5d4007;
+  color: white;
+  border: none;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-radius: 30px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer; /* 클릭 가능하다는 표시 */
+  margin-top: 15px;
+}

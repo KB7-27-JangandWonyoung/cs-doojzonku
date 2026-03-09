@@ -4,6 +4,65 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link rel="stylesheet" href="css/quiz.css" />
   </head>
-  <body></body>
+  <body>
+    <div class="mobile-container">
+      <header class="quiz-header">
+        <div class="info-box">
+          <i data-lucide="cooking-pot"></i>
+          <div>재료<br />1 / 10</div>
+        </div>
+        <div class="info-box">
+          <i data-lucide="timer"></i>
+          <div>남은 시간<br />10 초</div>
+        </div>
+      </header>
+
+      <section class="progress-section">
+        <div class="progress-bar-container">
+          <div class="progress-fill"></div>
+        </div>
+        <div class="item-icons">
+          
+        </div>
+      </section>
+
+      <section class="visual-section">
+        <div class="character-circle">
+          <img src="asset/img_gred_1.png" />
+        </div>
+        <div class="product-image">
+          <img src="asset/img_gred_wrong_1.png"/>
+        </div>
+      </section>
+
+      <main class="quiz-content">
+        <div class="badge"> <code>&lt;/&gt;</code> JavaScript</div>
+        <h2 class="question">typeof null 의 결과는?</h2>
+        <div class="code-box">
+          <code>console.log(typeof null);</code>
+        </div>
+
+        <div class="options">
+          <label class="option-item correct"
+            ><input type="radio" name="quiz" /> <span></span
+          ></label>
+          <label class="option-item"
+            ><input type="radio" name="quiz" /> <span></span
+          ></label>
+          <label class="option-item"
+            ><input type="radio" name="quiz" /> <span></span
+          ></label>
+          <label class="option-item"
+            ><input type="radio" name="quiz" /> <span></span
+          ></label>
+        </div>
+      </main>
+
+      <footer class="quiz-footer">
+        <button id="check-btn">정답 확인하기</button>
+      </footer>
+    </div>
+  </body>
 </html>
