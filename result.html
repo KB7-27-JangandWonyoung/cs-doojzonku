@@ -4,44 +4,80 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link rel="stylesheet" href="css/common.css" />
     <style>
-      #container {
-        width: 540px;
-        height: 100vh;
-        border: 1px solid;
-        margin: auto;
+      body {
+        background-color: var(--main-bg-color);
+        margin: 0;
       }
 
-      div {
-        border: 1px solid;
-        margin: 5px;
+      #container {
+        width: 540px;
+        min-height: 100vh;
+        height: auto;
+
+        margin: auto;
+        padding: 10px 20px;
+        background-color: var(--mobile-bg-color);
+
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+      }
+
+      #score,
+      #retry_button {
+        border-radius: 10px;
       }
 
       #score {
         height: 50px;
+        width: 300px;
+        margin: auto;
+        display: flex;
+        gap: 15px;
+        align-items: center;
+        justify-content: center;
+        font-family: 'PfStardust30', sans-serif;
+        background-color: var(--dark-brown);
+        color: var(--light-brown);
+      }
+
+      #retry_button {
+        height: 60px;
+        width: 100%;
+        border-radius: 10px;
+        background-color: var(--dark-brown);
+        color: var(--light-brown);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        cursor: pointer;
+        gap: 12px;
       }
 
       #description {
-        height: 100px;
+        margin: auto;
+        text-align: center;
       }
 
       #dzk_image {
-        height: 200px;
+        border: 1px solid var(--dark-brown);
+        height: 100px;
       }
 
       #questions {
-        height: 250px;
+        font-family: 'PfStardust30', sans-serif;
+        color: var(--primary-green);
       }
 
-      #retry {
-        height: 50px;
-        position: relative;
-        left: 0;
-        bottom: 0;
-        right: 0;
-        text-align: center;
+      #retry_button > div {
+        font-size: xx-large;
+        font-family: 'PfStardust30', sans-serif;
         display: flex;
-        justify-content: center;
+        align-items: center;
       }
 
       .quiz-container {
@@ -50,15 +86,52 @@
         grid-template-rows: repeat(5, 1fr);
         gap: 10px;
       }
+
+      .quiz-item {
+        background-color: var(--dark-pink);
+        text-align: center;
+        font-size: x-large;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: var(--light-brown);
+        padding: 10px 0;
+        border-radius: 10px;
+      }
+
+      h2 {
+        font-family: 'PfStardust30', sans-serif;
+        font-weight: 800;
+        color: var(--dark-green);
+      }
+
+      h3 {
+        font-family: 'PfStardust30', sans-serif;
+        font-weight: 700;
+        color: var(--primary-green);
+      }
+
+      #retry_button > svg {
+        height: 28px;
+        width: 28px;
+        color: aliceblue;
+      }
     </style>
   </head>
   <body>
     <div id="container">
-      <div id="score"></div>
-      <div id="description"></div>
+      <div id="score">
+        <div>[아이콘]</div>
+        <div>1/10</div>
+        <div>⭐⭐⭐⭐⭐</div>
+      </div>
+      <div id="description">
+        <h2>이건 팡쫀쿠가 아닌데..</h2>
+        <h3>너무 맛이 없어서 먹지 못하겠어요...</h3>
+      </div>
       <div id="dzk_image"></div>
       <div id="questions">
-        <div>들어간 재료들</div>
+        <h3>들어간 재료들</h3>
         <!-- 문제 10개 -->
         <div class="quiz-container">
           <div class="quiz-item">1</div>
@@ -73,8 +146,22 @@
           <div class="quiz-item">10</div>
         </div>
       </div>
-      <div id="retry">
-        <div>[아이콘]</div>
+      <div id="retry_button">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="#fff4e6"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="lucide lucide-rotate-ccw-icon lucide-rotate-ccw"
+        >
+          <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
+          <path d="M3 3v5h5" />
+        </svg>
         <div>다시 도전하기</div>
       </div>
     </div>
