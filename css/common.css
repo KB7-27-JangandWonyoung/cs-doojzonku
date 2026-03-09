@@ -1,1 +1,15 @@
 /* 공통 스타일 및 변수 정의 */
+:root {
+  --main-bg-color: #f7f6d3;
+  --mobile-bg-color: #fffee4;
+  --dark-green: #1a6601;
+  --light-green: #d8edd6;
+  --primary-green: #51ae00;
+  --primary-brown: #a97006;
+  --dark-brown: #573701;
+  --light-brown: #fff4e6;
+  --primary-red: #a91906;
+  --light-pink: #fceff5;
+  --primary-pink: #f39eb6;
+  --dark-pink: #ff7098;
+}
