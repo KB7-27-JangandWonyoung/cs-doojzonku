@@ -87,16 +87,16 @@ function loadQuestion() {
 
   progressBar.style.width = `${calculateProgress(currentIndex, quizData.length)}%`;
 
-    optionButtons.forEach((btn, idx) => {
-        btn.querySelector('.option-text').textContent = currentQuiz.options[idx];
-        btn.classList.remove('active', 'correct', 'wrong', 'disabled'); // 클래스 모두 제거
-        btn.disabled = false;
-        btn.onclick = () => {
-            optionButtons.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            selectedOptionIndex = idx;
-        };
-    });
+  optionButtons.forEach((btn, idx) => {
+    btn.querySelector('.option-text').textContent = currentQuiz.options[idx];
+    btn.classList.remove('active', 'correct', 'wrong', 'disabled'); // 클래스 모두 제거
+    btn.disabled = false;
+    btn.onclick = () => {
+      optionButtons.forEach((b) => b.classList.remove('active'));
+      btn.classList.add('active');
+      selectedOptionIndex = idx;
+    };
+  });
 }
 
 // 3. 결과 확인
@@ -138,29 +138,24 @@ confirmBtn.onclick = () => {
     showToast(`🤢 ${badIngredients[currentIndex % 10]} 투입...`, false);
   }
 
-    // 5번: 정답 확인 시 해설 노출 및 스크롤
-    explanationText.textContent = currentQuiz.explanation;
-    explanationSection.style.display = 'block';
-    
-    optionButtons.forEach((btn, idx) => {
-        btn.disabled = true;
-        if (idx === currentQuiz.answer) {
-        // 정답인 버튼에 .correct 클래스 추가 (안내 문구 자동 노출)
-        btn.classList.add('correct');
-        } else if (idx === selectedOptionIndex && !isCorrect) {
-        // 내가 선택한게 오답일 때 .wrong 클래스 추가
-        btn.classList.add('wrong');
-        } else {
-          btn.classList.add('disabled');  
-        }
-    });
+  // 5번: 정답 확인 시 해설 노출 및 스크롤
+  explanationText.textContent = currentQuiz.explanation;
+  explanationSection.style.display = 'block';
 
-    confirmBtn.textContent = "다음 문제로 이동";
-    
-    // 해설쪽으로 부드럽게 스크롤
-    setTimeout(() => {
-        explanationSection.scrollIntoView({ behavior: 'smooth' });
-    }, 100);
+  optionButtons.forEach((btn, idx) => {
+    btn.disabled = true;
+    if (idx === currentQuiz.answer) {
+      // 정답인 버튼에 .correct 클래스 추가 (안내 문구 자동 노출)
+      btn.classList.add('correct');
+    } else if (idx === selectedOptionIndex && !isCorrect) {
+      // 내가 선택한게 오답일 때 .wrong 클래스 추가
+      btn.classList.add('wrong');
+    } else {
+      btn.classList.add('disabled');
+    }
+  });
+
+  confirmBtn.textContent = '다음 문제로 이동';
 };
 
 // 4번: 토스트 메시지 함수
