@@ -1,137 +1,197 @@
-import { checkIsCorrect, calculateProgress} from './utils.js'
+import { checkIsCorrect, calculateProgress } from './utils.js';
 
 let quizData = [];
 let currentIndex = 0;
 let selectedOptionIndex = null;
-
 let correctCount = 0;
-let selectedIngredients = [];
-const goodIngredients = ["카다이프", "2", "3", "4", "5", "6", "7", "8", "9", "10" ]
-const badIngredients = ["소면", "2-2", "3-2", "4-2", "5-2", "6-2", "7-2", "8-2", "9-2", "10-2"]
+let userResults = []; // 3번 요구사항: 맞혔는지 여부 저장
 
-//HTML 요소 선택
-const questionText = document.querySelector('.question-text');
-const codeBlock = document.querySelector('.code-block');
-const optionButtons = document.querySelectorAll('.option-button');
-const confirmBtn = document.querySelector('.bottom-confirm-btn');
-const explanationArea = document.querySelector('.explanation-area');
-const explanationText = document.querySelector('.explanation-text');
-const vsImage = document.querySelector('.vs-image');
+const goodIngredients = [
+  '카다이프',
+  '피스타치오',
+  '올리브오일',
+  '화이트초콜릿',
+  '마시멜로우',
+  '버터',
+  '약불',
+  '코코아 파우더',
+  '코코아 가루 묻히기',
+  '마시멜로우 잘 감싸기',
+];
+const badIngredients = [
+  '소면',
+  '고추냉이',
+  '참기름',
+  '두부',
+  '엿',
+  '바나나',
+  '강불',
+  '흑임자가루',
+  '코코아 가루 폭발',
+  '반죽 분해',
+];
+
+// HTML 요소 선택
+const questionText = document.querySelector('.question');
+const codeBlock = document.querySelector('.code-box code');
+const optionButtons = document.querySelectorAll('.option-item');
+const confirmBtn = document.querySelector('#check-btn');
 const progressBar = document.querySelector('.progress-fill');
+const itemIcons = document.querySelector('.item-icons');
+const ingredientCountText = document.querySelector('.info-box div'); // 1번: 재료 수 표시 영역
+const characterImg = document.querySelector('.character-circle img');
+const productImg = document.querySelector('.product-image img');
 
-// 토스트 메시지 함수(오디오 상태관리 추후 추가!!)
-function showToast(message) {
-    const toast = document.createElement('div');
-    toast.className = 'toast-message';
-    toast.innerText = message;
-    document.body.appendChild(toast);
+// 5번: 해설창 동적 생성 (HTML에 없으므로 추가)
+const explanationArea = document.createElement('div');
+explanationArea.className = 'explanation-box';
+explanationArea.style.display = 'none';
+explanationArea.style.padding = '15px';
+explanationArea.style.marginTop = '15px';
+explanationArea.style.backgroundColor = '#f0f0f0';
+explanationArea.style.borderRadius = '10px';
+document.querySelector('.quiz-content').appendChild(explanationArea);
 
-    setTimeout(() => {
-        toast.classList.add('fade-out');
-        setTimeout(() => toast.remove(), 500);
-
-    }, 2000)
-}
-//1. 데이터 로드
+// 1. 초기화
 async function init() {
     try {
-        const response = await fetch('../../data/questions.json'); // 상대 경로 확인 필요
-        quizData = await response.json();
-        loadQuestion();
+        const response = await fetch('./data/questions.json');
+        const data = await response.json();
+        quizData = data.quizList;
+
+        if (quizData.length > 0) {
+            loadQuestion();
+            updateIngredients(0);
+        }
     } catch (error) {
-        console.error("데이터를 불러오는데 실패했습니다:", error);
+        console.error("로드 실패:", error);
     }
 }
 
-//2. 문제 출력
+// 2. 문제 로드
 function loadQuestion() {
     const currentQuiz = quizData[currentIndex];
-
-    //UI 초기화
     selectedOptionIndex = null;
-    explanationArea.style.display = 'none';
     confirmBtn.textContent = "정답 확인하기";
+    explanationArea.style.display = 'none'; // 새 문제 시 해설 숨김
 
-    // 스크롤 초기화 (다음 문제로 넘어갈 때 상단으로)
-    document.querySelector('.quiz-scroll-container').style.overflowY = 'hidden';
+    // 상단 재료 텍스트 업데이트 (1번 요구사항)
+    ingredientCountText.innerHTML = `재료<br />${currentIndex + 1} / ${quizData.length}`;
 
-    //데이터 바인딩
     questionText.textContent = currentQuiz.question;
-    codeBlock.textContent = currentQuiz.code;
-    progressBar.style.width = '&{calculateProgress(cureentIndex, quizData.length)}%'
+    
+    const codeBox = document.querySelector('.code-box');
+    if (currentQuiz.code) {
+        codeBox.style.display = 'block';
+        codeBlock.textContent = currentQuiz.code;
+    } else {
+        codeBox.style.display = 'none';
+    }
+
+    if (characterImg) characterImg.src = currentQuiz.characterImg;
+    if (productImg) productImg.src = currentQuiz.productImg;
+    
+    progressBar.style.width = `${calculateProgress(currentIndex, quizData.length)}%`;
 
     optionButtons.forEach((btn, idx) => {
-        btn.textContent = currentQuiz.option[idx];
-        btn.classList.remove('correct', 'wrong', 'active');
+        btn.querySelector('.option-text').textContent = currentQuiz.options[idx];
+        btn.classList.remove('active');
+        btn.style.backgroundColor = "";
         btn.disabled = false;
-
         btn.onclick = () => {
             optionButtons.forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
             selectedOptionIndex = idx;
-        }
-    })
+        };
+    });
 }
 
-//3. 결과 확인
+// 3. 결과 확인
 confirmBtn.onclick = () => {
     if (selectedOptionIndex === null) {
         alert("정답을 골라주세요!");
         return;
     }
 
-    // '다음 문제' 버튼으로 변했을 때의 동작
     if (confirmBtn.textContent === "다음 문제로 이동") {
         currentIndex++;
         if (currentIndex < quizData.length) {
             loadQuestion();
+            window.scrollTo(0, 0); // 상단으로 스크롤 복구
         } else {
-            //최종 데이터 저장 후 이동
-            const finalData = {
-                totalCorrect: correctCount,
-                ingredients: selectedIngredients,
-                totalQuestions: quizData.length
-            }
-            localStorage.setItem('cookieResult', JSON.stringify(finalData));
+            // 2, 3번 요구사항: 데이터 저장 후 이동
+            localStorage.setItem('quizResults', JSON.stringify(userResults));
             location.href = 'result.html';
         }
         return;
     }
 
-    //정답 판별 및 UI 업데이트
     const currentQuiz = quizData[currentIndex];
     const isCorrect = checkIsCorrect(selectedOptionIndex, currentQuiz.answer);
 
-    // --- 재료 및 토스트 로직 추가 ---
-    let ingredient = "";
-    if (isCorrect) {
-        correctCount++;
-        ingredient = goodIngredients[currentIndex % goodIngredients.length];
-        showToast(`${ingredient}(이)가 들어갔습니다! ✨`);
-    } else {
-        ingredient = badIngredients[currentIndex % badIngredients.length];
-        showToast(`이상한 재료(${ingredient})가 들어갔습니다... 🤢`);
-    }
-    selectedIngredients.push(ingredient);
-
-    optionButtons.forEach((btn, idx) => {
-        btn.disabled = true;
-        if (idx === currentQuiz.answer) {
-            btn.classList.add('correct'); // 정답
-        } else if (idx === selectedOptionIndex && !isCorrect) {
-            btn.classList.add('wrong'); // 내가 고른 오답
-        }
+    // 3번: 결과 데이터 기록
+    userResults.push({
+        id: currentQuiz.id,
+        isCorrect: isCorrect
     });
 
-    //해설 노출 및 이미지 변경
-    explanationText.textContent = currentQuiz.explanation;
-    explanationArea.style.display = 'block';
-    vsImage.src = isCorrect ? 'win.jpg' : 'lose.jpg'; // 경로 확인 필요
+    // 4번: 토스트 메시지 출력
+    if (isCorrect) {
+        correctCount++;
+        updateIngredients(correctCount);
+        showToast(`✨ ${goodIngredients[currentIndex % 10]} 추가!`, true);
+    } else {
+        showToast(`🤢 ${badIngredients[currentIndex % 10]} 투입...`, false);
+    }
 
-    //스크롤 허용(해설이 길 경우)
-    document.querySelector('.quiz-scroll-container').style.overflowY = 'auto';
+    // 5번: 정답 확인 시 해설 노출 및 스크롤
+    explanationArea.innerHTML = `<strong>💡 해설:</strong><br>${currentQuiz.explanation}`;
+    explanationArea.style.display = 'block';
+    
+    optionButtons.forEach((btn, idx) => {
+        btn.disabled = true;
+        if (idx === currentQuiz.answer) btn.style.backgroundColor = "#d4edda";
+        else if (idx === selectedOptionIndex && !isCorrect) btn.style.backgroundColor = "#f8d7da";
+    });
 
     confirmBtn.textContent = "다음 문제로 이동";
+    
+    // 해설쪽으로 부드럽게 스크롤
+    setTimeout(() => {
+        explanationArea.scrollIntoView({ behavior: 'smooth' });
+    }, 100);
 };
+
+// 4번: 토스트 메시지 함수
+function showToast(message, isGood) {
+    const toast = document.createElement('div');
+    toast.className = 'toast';
+    toast.textContent = message;
+    toast.style.position = 'fixed';
+    toast.style.bottom = '150px';
+    toast.style.left = '50%';
+    toast.style.transform = 'translateX(-50%)';
+    toast.style.backgroundColor = isGood ? '#28a745' : '#dc3545';
+    toast.style.color = 'white';
+    toast.style.padding = '10px 20px';
+    toast.style.borderRadius = '20px';
+    toast.style.zIndex = '1000';
+    document.body.appendChild(toast);
+    
+    setTimeout(() => {
+        toast.style.opacity = '0';
+        setTimeout(() => toast.remove(), 500);
+    }, 2000);
+}
+
+function updateIngredients(count) {
+    itemIcons.innerHTML = '';
+    for (let i = 0; i < count; i++) {
+        const img = document.createElement('img');
+        img.src = 'assets/img_correct.png'; // s 확인!
+        img.style.width = "30px";
+        itemIcons.appendChild(img);
+    }
+}
 
 init();
