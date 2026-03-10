@@ -9,8 +9,8 @@ document.addEventListener('DOMContentLoaded', () => {
     true,
     true,
     true,
-    false,
-    false,
+    true,
+    true,
     true,
     false,
     true,
@@ -20,9 +20,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const explanations = [
     '1번: 두쫀쿠는 빵을 정말 좋아해서 이름이 그렇게 붙었답니다.',
-    '2번: 이 문제는 함정이었어요! 사실 정답은...2',
-    '3번: 이 문제는 함정이었어요! 사실 정답은...3',
-    '4번: 이 문제는 함정이었어요! 사실 정답은...4',
+    '2번: 이 문제는 함정이었어요! 사실 정답은...2 Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione quod velit voluptatum praesentium optio commodi illo quae libero eaque eligendi corporis exercitationem aperiam eius et quam minus tempora corrupti omnis ab, quaerat sunt earum. Tempore repellendus, exercitationem incidunt culpa at doloribus omnis hic molestias facere quasi ipsa deserunt tempora corporis',
+    '3번: 이 문제는 함정이었어요!\n 해설: color는 글자색을 바꿀 때 사용하며, 배경색을 바꿀 때는 background-color 속성을 사용해야 합니다.',
+    '4번: 이 문제는 함정이었어요!\n 해설: 시각적인 차이는 없을지 몰라도, **웹 접근성(Accessibility)**과 SEO(검색 엔진 최적화) 측면에서 매우 중요합니다. 스크린 리더가 웹 페이지 구조를 파악하거나 검색 엔진이 핵심 내용을 수집할 때 <div>만 가득한 코드보다 <main>, <article>, <section> 등이 잘 짜인 코드를 훨씬 높게 평가합니다.',
     '5번: 이 문제는 함정이었어요! 사실 정답은...5',
     '6번: 이 문제는 함정이었어요! 사실 정답은...6',
     '7번: 이 문제는 함정이었어요! 사실 정답은...7',
