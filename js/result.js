@@ -5,7 +5,18 @@
 document.addEventListener('DOMContentLoaded', () => {
   lucide.createIcons();
   // 1. 정답 정오표 가져오기
-  const result = [true, true, false, true, true, true, false, true, true, false];
+  const result = [
+    true,
+    true,
+    true,
+    false,
+    false,
+    true,
+    false,
+    true,
+    true,
+    false,
+  ];
 
   const explanations = [
     '1번: 두쫀쿠는 빵을 정말 좋아해서 이름이 그렇게 붙었답니다.',
@@ -30,6 +41,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // 2. 점수 데이터 가져오기
   const score = result.filter((isCorrect) => isCorrect === true).length;
   const total = 10;
+
+  // 2.1. 점수에 따른 bgm
+  playResultSound(score);
 
   const scoreElement = document.getElementById('score-text');
 
@@ -122,5 +136,40 @@ function updateResultUI(score, total, display, stars, title, sub, dzkImage) {
     title.innerText = '이건 팡쫀쿠가 아닌데..';
     sub.innerText = '너무 맛이 없어서 먹지 못하겠어요...';
     dzkImage.src = 'assets/angry_boy_cookie.gif';
+  }
+}
+
+/**
+ * 결과 점수에 따라 BGM을 1회 재생하는 함수
+ */
+function playResultSound(score) {
+  let sound;
+
+  // 1. 점수별 사운드 선택
+  if (score >= 7) {
+    sound = document.getElementById('bgm_success');
+  } else {
+    sound = document.getElementById('bgm_fail');
+  }
+
+  if (sound) {
+    sound.volume = 0.5; // 볼륨 조절 (0.0 ~ 1.0)
+    sound.currentTime = 0; // 혹시 모르니 처음부터 재생되도록 초기화
+
+    // 2. 재생 시도
+    const playPromise = sound.play();
+
+    if (playPromise !== undefined) {
+      playPromise.catch((error) => {
+        console.log('사운드 재생 대기 중...');
+        document.body.addEventListener(
+          'click',
+          () => {
+            sound.play();
+          },
+          { once: true },
+        );
+      });
+    }
   }
 }
