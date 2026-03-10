@@ -7,22 +7,7 @@
     <link rel="stylesheet" href="css/common.css" />
     <link rel="stylesheet" href="css/main.css" />
   </head>
-  <script>
-    // 페이지 로드시 bgm 재생
-    window.onload = function () {
-      var bgm = new Audio('asset/main-bgm.mp3');
-      bgm.loop = true;
-      bgm.play();
-    };
-
-    function playClickSound() {
-      var clickSound = new Audio('asset/click-sound.mp3');
-      clickSound.play();
-      setTimeout(function () {
-        location.href = 'quiz.html';
-      }, 100);
-    }
-  </script>
+  <script src="js/main.js"></script>
   <body>
     <div class="screen">
       <!-- 뱃지 -->
@@ -46,7 +31,7 @@
       <!-- 두쫀쿠 이미지 -->
       <div>
         <img
-          src="asset/main.png"
+          src="assets/main.png"
           alt="두쫀쿠 이미지"
           style="width: 100%; max-height: 400px; margin: 0"
         />
@@ -69,7 +54,7 @@
 
       <!-- 시작 버튼 -->
       <div class="startBtn">
-        <button onclick="location.href = 'quiz.html'">팡쫀쿠 만들기</button>
+        <button onclick="playClickSound()">팡쫀쿠 만들기</button>
       </div>
     </div>
   </body>
