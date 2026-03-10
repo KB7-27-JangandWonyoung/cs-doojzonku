@@ -20,7 +20,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   const quizList = questionsData.quizList;
-  console.log(quizList);
 
   for (let question of quizResult) {
     result.push(question.isCorrect);
@@ -39,7 +38,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   }
 
-  console.log(explanations);
 
   const quizItems = document.querySelectorAll('.quiz-item');
 
@@ -93,19 +91,20 @@ document.addEventListener('DOMContentLoaded', async () => {
   const modalTitle = document.getElementById('modal_title');
   const closeBtn = document.getElementById('close_modal');
 
+  const answerNumber = document.querySelector('.ans-label');
   const answerCode = document.getElementById('modal_answer_code');
   const explanationText = document.getElementById('modal_explanation_text');
 
   quizItems.forEach((item, index) => {
     item.addEventListener('click', () => {
       const data = explanations[index];
-      const isCorrect = result[index];
 
       // 1. 제목 및 배너 설정
       modalTitle.innerText = `${data.id}번 문제 해설`;
 
       // 3. 문제 및 정답 (innerText를 써야 HTML 태그가 글자로 나옵니다!)
-      answerCode.innerText = data.answerNumber + '. ' + data.answer;
+      answerNumber.innerText = data.answerNumber;
+      answerCode.innerText = data.answer;
 
       // 4. 해설
       explanationText.innerText = data.explanation;
