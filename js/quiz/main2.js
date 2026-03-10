@@ -41,16 +41,8 @@ const itemIcons = document.querySelector('.item-icons');
 const ingredientCountText = document.querySelector('.info-box div'); // 1번: 재료 수 표시 영역
 const characterImg = document.querySelector('.character-circle img');
 const productImg = document.querySelector('.product-image img');
-
-// 5번: 해설창 동적 생성 (HTML에 없으므로 추가)
-const explanationArea = document.createElement('div');
-explanationArea.className = 'explanation-box';
-explanationArea.style.display = 'none';
-explanationArea.style.padding = '15px';
-explanationArea.style.marginTop = '15px';
-explanationArea.style.backgroundColor = '#f0f0f0';
-explanationArea.style.borderRadius = '10px';
-document.querySelector('.quiz-content').appendChild(explanationArea);
+const explanationSection = document.querySelector('.explanation-section');
+const explanationText = document.querySelector('.explanation-text');
 
 // 1. 초기화
 async function init() {
@@ -60,6 +52,7 @@ async function init() {
         quizData = data.quizList;
 
         if (quizData.length > 0) {
+            explanationSection.style.display = 'none';
             loadQuestion();
             updateIngredients(0);
         }
@@ -73,7 +66,8 @@ function loadQuestion() {
     const currentQuiz = quizData[currentIndex];
     selectedOptionIndex = null;
     confirmBtn.textContent = "정답 확인하기";
-    explanationArea.style.display = 'none'; // 새 문제 시 해설 숨김
+    // 새 문제 로드 시 해설창 다시 숨김
+    explanationSection.style.display = 'none';
 
     // 상단 재료 텍스트 업데이트 (1번 요구사항)
     ingredientCountText.innerHTML = `재료<br />${currentIndex + 1} / ${quizData.length}`;
@@ -145,8 +139,8 @@ confirmBtn.onclick = () => {
     }
 
     // 5번: 정답 확인 시 해설 노출 및 스크롤
-    explanationArea.innerHTML = `<strong>💡 해설:</strong><br>${currentQuiz.explanation}`;
-    explanationArea.style.display = 'block';
+    explanationText.textContent = currentQuiz.explanation;
+    explanationSection.style.display = 'block';
     
     optionButtons.forEach((btn, idx) => {
         btn.disabled = true;
