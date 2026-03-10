@@ -59,7 +59,7 @@
       <audio id="bgm_success" src="assets/victory_bgm.mp3"></audio>
       <audio id="bgm_fail" src="assets/fail_bgm.mp3"></audio>
     </div>
-    <!--  모달 - 얘는 쓸 수도 있고 안 쓸 수도 있고 -->
+    <!--  모달  -->
     <div id="modal_overlay" class="hidden">
       <div id="modal_content">
         <div class="modal-header">
@@ -68,7 +68,21 @@
         </div>
         <hr />
         <div id="modal_body">
-          <p id="explanation_text"></p>
+
+          <!-- 1. 문제 및 정답 영역 -->
+          <div class="modal-question-container">
+            <div class="modal-answer-box">
+              <span class="ans-label">정답:</span>
+              <code id="modal_answer_code"></code>
+            </div>
+          </div>
+
+          <div class="modal-divider"></div>
+          <!-- 2. 해설 영역 -->
+          <div class="modal-explanation-container">
+            <div class="exp-header"><span>💡</span><strong>해설</strong></div>
+            <p id="modal_explanation_text" class="exp-text"></p>
+          </div>
         </div>
       </div>
     </div>

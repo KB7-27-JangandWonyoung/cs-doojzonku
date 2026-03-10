@@ -172,6 +172,14 @@ h4 {
   font-family: 'PfStardust30', sans-serif;
 }
 
+#modal_body {
+  font-family: sans-serif;
+}
+
+#explanation_text {
+  font-family: sans-serif;
+}
+
 #close_modal {
   background: none;
   border: none;
