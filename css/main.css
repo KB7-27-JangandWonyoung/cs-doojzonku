@@ -1,1 +1,85 @@
 /* 메인 페이지 전용 */
+html,
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0px;
+  min-height: 100vh;
+  background-color: var(--main-bg-color);
+}
+
+.screen {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  width: 450px;
+  height: 100vh;
+  padding: 20px;
+  background-color: var(--mobile-bg-color);
+  font-family: 'PfStardust30', sans-serif;
+}
+
+.badge {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 330px;
+  height: 50px;
+  background-color: var(--primary-brown);
+  border-radius: 50px;
+}
+
+.badge p {
+  color: var(--light-brown);
+  font-size: 18px;
+}
+
+.mainText h2 {
+  line-height: 30px;
+  color: var(--dark-green);
+}
+
+.mainText p {
+  line-height: 20px;
+
+  color: var(--primary-green);
+}
+
+.quizInfo {
+  display: flex;
+  flex-direction: row;
+  margin: 5px 0px;
+}
+
+.info {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.circle {
+  width: 17px;
+  height: 17px;
+  border-radius: 100%;
+  margin-right: 10px;
+}
+
+.startBtn button {
+  width: 433px;
+  height: 60px;
+  font-size: 20px;
+  font-family: 'PfStardust30', sans-serif;
+  border-radius: 20px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  color: var(--light-brown);
+  background-color: var(--dark-brown);
+}
+
+.startBtn button:hover {
+  background-color: var(--primary-brown);
+}
