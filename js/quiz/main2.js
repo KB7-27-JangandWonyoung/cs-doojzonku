@@ -5,7 +5,7 @@ let currentIndex = 0;
 let selectedOptionIndex = null;
 let correctCount = 0;
 let userResults = []; // 3번 요구사항: 맞혔는지 여부 저장
-
+let timerId;
 const goodIngredients = [
   '카다이프',
   '피스타치오',
@@ -43,7 +43,25 @@ const characterImg = document.querySelector('.character-circle img');
 const productImg = document.querySelector('.product-image img');
 const explanationSection = document.querySelector('.explanation-section');
 const explanationText = document.querySelector('.explanation-text');
+function timeAttack() {
+  let timeLeft = 10;
+  const timeDisplay = document.querySelector('.time-attack a');
+  timeDisplay.textContent = timeLeft;
+  timerId = setInterval(() => {
+    timeLeft--;
+    timeDisplay.textContent = timeLeft;
+    if (timeLeft <= 0) {
+      stopTimer(timerId);
+      confirmBtn.click();
+    }
+  }, 1000);
+}
 
+function stopTimer(timerId) {
+  if (timerId !== null) {
+    clearInterval(timerId);
+  }
+}
 // 1. 초기화
 async function init() {
   try {
@@ -63,6 +81,7 @@ async function init() {
 
 // 2. 문제 로드
 function loadQuestion() {
+  timeAttack(); // 타이머 시작
   const currentQuiz = quizData[currentIndex];
   selectedOptionIndex = null;
   confirmBtn.textContent = '정답 확인하기';
@@ -101,6 +120,7 @@ function loadQuestion() {
 
 // 3. 결과 확인
 confirmBtn.onclick = () => {
+  stopTimer(timerId); // 타이머 중지
   if (selectedOptionIndex === null) {
     alert('정답을 골라주세요!');
     return;
