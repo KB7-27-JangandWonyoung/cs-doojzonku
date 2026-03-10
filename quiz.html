@@ -4,6 +4,96 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link rel="stylesheet" href="css/common.css" />
+    <link rel="stylesheet" href="css/quiz.css" />
   </head>
-  <body></body>
+  <body>
+    <div class="mobile-container">
+      <header class="quiz-header">
+        <div class="info-box">
+          <img src="asset/ic_chef_hat.svg" width="27px" />
+          <div>재료<br />1 / 10</div>
+        </div>
+        <div class="info-box">
+          <img src="asset/ic_chef_hat.svg" width="27px" />
+          <div>남은 시간<br />10 초</div>
+        </div>
+      </header>
+
+      <section class="progress-section">
+        <div class="progress-bar-container">
+          <div class="progress-fill"></div>
+        </div>
+        <div class="item-icons"></div>
+      </section>
+
+      <section class="visual-section">
+        <div class="character-circle">
+          <img src="asset/img_gred_1.png" />
+        </div>
+        <div class="product-image">
+          <img src="asset/img_gred_wrong_1.png" />
+        </div>
+      </section>
+
+      <main class="quiz-content">
+        <div class="badge"><code>&lt;/&gt;</code> JavaScript</div>
+        <h2 class="question">typeof null 의 결과는?</h2>
+        <div class="code-box">
+          <code>console.log(typeof null);</code>
+        </div>
+
+        <div class="options">
+          <button class="option-item">
+            <span class="option-number">1</span>
+            <span class="option-text">선택지 내용</span>
+          </button>
+
+          <button class="option-item">
+            <span class="option-number">2</span>
+            <span class="option-text">선택지 내용</span>
+          </button>
+
+          <button class="option-item">
+            <span class="option-number">3</span>
+            <span class="option-text">선택지 내용</span>
+          </button>
+
+          <button class="option-item">
+            <span class="option-number">4</span>
+            <span class="option-text">선택지 내용</span>
+          </button>
+        </div>
+      </main>
+
+      <div class="quiz-bottom">
+        <button id="check-btn">정답 확인하기</button>
+      </div>
+    </div>
+
+    <script>
+      const tabs = document.querySelectorAll('.option-item');
+
+      tabs.forEach((tab) => {
+        tab.addEventListener('click', () => {
+          tabs.forEach((t) => t.classList.remove('active'));
+          tab.classList.add('active');
+        });
+      });
+
+      const itemIcons = document.querySelector('.item-icons');
+      let count = 10;
+
+      function renderImages() {
+        itemIcons.innerHTML = '';
+        for (let i = 0; i < count; i++) {
+          const img = document.createElement('img');
+          img.src = 'asset/img_correct.png';
+          itemIcons.appendChild(img);
+        }
+      }
+
+      renderImages();
+    </script>
+  </body>
 </html>
