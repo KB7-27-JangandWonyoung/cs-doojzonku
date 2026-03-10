@@ -1,1 +1,38 @@
 /* 공통 스타일 및 변수 정의 */
+:root {
+  --main-bg-color: #f7f6d3;
+  --mobile-bg-color: #fffee4;
+  --dark-green: #1a6601;
+  --light-green: #d8edd6;
+  --primary-green: #51ae00;
+  --primary-brown: #a97006;
+  --dark-brown: #573701;
+  --light-brown: #fff4e6;
+  --primary-red: #a91906;
+  --light-pink: #fceff5;
+  --primary-pink: #f39eb6;
+  --dark-pink: #ff7098;
+}
+@font-face {
+  font-family: 'PfStardust30';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2506-1@1.0/PFStardust.woff2')
+    format('woff2');
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'PfStardust30';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2506-1@1.0/PFStardustBold.woff2')
+    format('woff2');
+  font-weight: 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'PfStardust30';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2506-1@1.0/PFStardustExtraBold.woff2')
+    format('woff2');
+  font-weight: 800;
+  font-display: swap;
+}

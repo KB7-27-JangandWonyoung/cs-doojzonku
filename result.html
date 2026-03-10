@@ -4,6 +4,64 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link rel="stylesheet" href="css/common.css" />
+    <link rel="stylesheet" href="css/result.css" />
   </head>
-  <body></body>
+  <body>
+    <div id="container">
+      <div id="score">
+        <div>
+          <i data-lucide="chef-hat"></i>
+        </div>
+        <div id="score-text">0/10</div>
+        <div id="stars">
+          <i data-lucide="star"></i>
+          <i data-lucide="star"></i>
+          <i data-lucide="star"></i>
+          <i data-lucide="star"></i>
+          <i data-lucide="star"></i>
+        </div>
+      </div>
+      <div id="description">
+        <h2>이건 팡쫀쿠가 아닌데..</h2>
+        <h3>너무 맛이 없어서 먹지 못하겠어요...</h3>
+      </div>
+      <div id="dzk_image"></div>
+      <div id="questions">
+        <h3>들어간 재료들</h3>
+        <!-- 문제 10개 -->
+        <div class="quiz-container">
+          <div class="quiz-item" data-index="0">1</div>
+          <div class="quiz-item" data-index="1">2</div>
+          <div class="quiz-item" data-index="2">3</div>
+          <div class="quiz-item" data-index="3">4</div>
+          <div class="quiz-item" data-index="4">5</div>
+          <div class="quiz-item" data-index="5">6</div>
+          <div class="quiz-item" data-index="6">7</div>
+          <div class="quiz-item" data-index="7">8</div>
+          <div class="quiz-item" data-index="8">9</div>
+          <div class="quiz-item" data-index="9">10</div>
+        </div>
+      </div>
+      <div id="retry_button">
+        <i data-lucide="rotate-ccw"></i>
+        <div>다시 도전하기</div>
+      </div>
+    </div>
+    <!--  모달 - 얘는 쓸 수도 있고 안 쓸 수도 있고 -->
+    <div id="modal_overlay" class="hidden">
+      <div id="modal_content">
+        <div class="modal-header">
+          <span id="modal_title">1번 문제 해설</span>
+          <button id="close_modal">&times;</button>
+        </div>
+        <hr />
+        <div id="modal_body">
+          <p id="explanation_text"></p>
+        </div>
+      </div>
+    </div>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="js/result.js"></script>
+  </body>
 </html>
