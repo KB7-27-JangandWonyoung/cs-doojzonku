@@ -65,9 +65,8 @@ body {
 }
 
 #dzk-image-container {
-  width: 225px;
+  width: 300px;
   height: 225px;
-  border-radius: 50%;
   overflow: hidden;
   margin: 0 auto;
 }
