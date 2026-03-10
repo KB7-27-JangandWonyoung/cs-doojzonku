@@ -10,7 +10,7 @@ body {
 
 /* 2. 가로 540px 고정 모바일 뷰 컨테이너 */
 .mobile-container {
-  width: 540px;
+  width: 450px;
   height: 100vh;
   background-color: #fffee4;
   display: flex;
@@ -25,33 +25,33 @@ body {
 /* 3. 상단 정보 표시 영역 (재료 정보, 타이머) */
 .quiz-header {
   display: flex; /* 정보 박스들을 가로로 배치 */
-  height: 80px;
+  height: 50px;
   justify-content: space-between; /* 양 끝으로 벌려서 배치 (왼쪽: 재료, 오른쪽: 시간) */
   margin-bottom: 20px;
-  margin-left: 20px;
-  margin-right: 20px;
-  margin-top: 30px;
+  margin-left: 15px;
+  margin-right: 15px;
+  margin-top: 20px;
 }
 
 /* 4. 헤더 안의 개별 갈색 박스 */
 .info-box {
   background-color: #5d4007;
   color: white;
-  padding: 10px 20px;
+  padding: 15px 15px;
   border-radius: 20px;
   display: flex; /* 아이콘과 텍스트를 가로로 배치 */
   align-items: center; /* 아이콘과 텍스트의 세로 중앙 정렬 */
   gap: 10px; /* 아이콘과 텍스트 사이의 간격 */
-  font-size: 0.9rem; /* 글자 크기 살짝 작게 */
+  font-size: 12px ;
 }
 
 /* 3. 퀴즈 진행 상태 */
 .progress-section {
   width: auto;
-  height: 90px;
+  height: 50px;
   background-color: #fceff5;
-  margin-left: 20px;
-  margin-right: 20px;
+  margin-left: 15px;
+  margin-right: 15px;
   padding-left: 20px;
   padding-right: 20px;
   padding-top: 10px;
@@ -59,7 +59,7 @@ body {
 }
 /* 3. 퀴즈 진행 상태 프로그래스바 */
 .progress-bar-container {
-  height: 15px;
+  height: 10px;
   background-color: #f39eb6;
   border-radius: 30px;
 }
@@ -74,11 +74,13 @@ body {
 /* 3. 퀴즈 진행 상태 아이콘 */
 .item-icons {
   display: flex;
-  height: 30px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  justify-content: space-between;
-  background-color: #5d4007;
+  gap: 6px;
+  height: 35px;
+}
+
+.item-icons img{
+  width: 30px;
+  height: 35px;
 }
 
 /* 3. 재료 그림 배경 */
@@ -101,7 +103,7 @@ body {
 
   /* 요소들이 배경보다 위에 오도록 보장 */
   z-index: 1;
-  margin-top: 20px;
+  margin-top: 10px;
 }
 
 .character-circle img,
@@ -112,9 +114,11 @@ body {
 
 /* 5. 퀴즈  */
 .quiz-content {
-  padding: 30px 25px;
-  margin-top: 20px; /* 시각 섹션과 살짝 겹치게 하여 부드럽게 연결 */
-  z-index: 2;
+  padding: 20px 25px;
+  background-color: #FFFFEE;
+  border: #F7F6DA;
+  border-radius: 20px;
+  margin: 15px;
   position: relative;
 }
 
@@ -125,27 +129,26 @@ body {
   color: white;
   padding: 5px 15px;
   border-radius: 20px;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: bold;
-  margin-bottom: 15px;
 }
 
 /* 질문 텍스트 */
 .question {
-  font-size: 22px;
+  font-size: 17px;
   font-weight: bold;
   color: #333;
-  margin-bottom: 20px;
-  line-height: 1.4;
+  margin-bottom: 15px;
 }
 
 /* 코드 박스 (연분홍 배경) */
 .code-box {
   background-color: #fff0f5; /* 아주 연한 분홍색 */
-  padding: 20px;
+  height: 20px;
+  padding: 10px;
   border-radius: 20px;
   border: 1px solid #ffdae9;
-  margin-bottom: 25px;
+  margin-bottom: 10px;
   text-align: center;
 }
 
@@ -158,30 +161,51 @@ body {
 /* 6. 퀴즈 선택지(답안) 스타일 */
 .option-item {
   display: block; /* 세로로 한 줄씩 차지 */
-  height: 50px; /* 선택지 높이 고정 */
-  background: #ff769b;
+  border: none;
+  height: 40px; 
+  width: 100%;
+  background-color: #ff769b;
   margin-bottom: 10px;
   border-radius: 25px;
 }
 
-/* 7. 정답일 경우의 스타일 (클래스 추가 시 적용) */
-.option-item.correct {
-  background: #d4edda;
+/* 7. 클릭했을 경우 스타일 */
+.option-item.active {
+  background-color: #E1EFDE;
   border: 2px solid #28a745;
 }
 
+/* 7. 정답일 경우의 스타일 */
+.option-item.correct {
+  background-color: #E1EFDE;
+  border: 2px solid #28a745;
+}
+
+/* 7. 오답일 경우의 스타일 */
+.option-item.correct {
+  background-color: #FD3131;
+  border: 2px solid #DE0000;
+}
+
+/* 7. 비활성화 스타일 */
+.option-item.correct {
+  background-color: #D9D9D9;
+}
+
+
 /* 8. 하단 정답 확인 버튼 */
 #check-btn {
-  width: 100%; 
+  width: 380px;
   height: 60px;
   background-color: #5d4007;
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
   color: white;
   border: none;
-  padding-left: 20px;
-  padding-right: 20px;
   border-radius: 30px;
   font-size: 1.2rem;
   font-weight: bold;
-  cursor: pointer; /* 클릭 가능하다는 표시 */
-  margin-top: 15px;
+  z-index: 2;
 }

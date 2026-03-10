@@ -10,11 +10,11 @@
     <div class="mobile-container">
       <header class="quiz-header">
         <div class="info-box">
-          <i data-lucide="cooking-pot"></i>
+          <img src="asset/ic_chef_hat.svg" width="27px"/>
           <div>재료<br />1 / 10</div>
         </div>
         <div class="info-box">
-          <i data-lucide="timer"></i>
+          <img src="asset/ic_chef_hat.svg" width="27px"/>
           <div>남은 시간<br />10 초</div>
         </div>
       </header>
@@ -23,9 +23,7 @@
         <div class="progress-bar-container">
           <div class="progress-fill"></div>
         </div>
-        <div class="item-icons">
-          
-        </div>
+        <div class="item-icons"></div>
       </section>
 
       <section class="visual-section">
@@ -33,36 +31,54 @@
           <img src="asset/img_gred_1.png" />
         </div>
         <div class="product-image">
-          <img src="asset/img_gred_wrong_1.png"/>
+          <img src="asset/img_gred_wrong_1.png" />
         </div>
       </section>
 
       <main class="quiz-content">
-        <div class="badge"> <code>&lt;/&gt;</code> JavaScript</div>
+        <div class="badge"><code>&lt;/&gt;</code> JavaScript</div>
         <h2 class="question">typeof null 의 결과는?</h2>
         <div class="code-box">
           <code>console.log(typeof null);</code>
         </div>
 
         <div class="options">
-          <label class="option-item correct"
-            ><input type="radio" name="quiz" /> <span></span
-          ></label>
-          <label class="option-item"
-            ><input type="radio" name="quiz" /> <span></span
-          ></label>
-          <label class="option-item"
-            ><input type="radio" name="quiz" /> <span></span
-          ></label>
-          <label class="option-item"
-            ><input type="radio" name="quiz" /> <span></span
-          ></label>
+          <button class="option-item"> </button>
+          <button class="option-item"> </button>
+          <button class="option-item"> </button>
+          <button class="option-item"> </button>
         </div>
       </main>
 
-      <footer class="quiz-footer">
+      <div class="quiz-bottom">
         <button id="check-btn">정답 확인하기</button>
-      </footer>
+      </div>
     </div>
+
+    <script>
+      const tabs = document.querySelectorAll(".option-item");
+
+      tabs.forEach(tab => {
+        tab.addEventListener("click",()=>{
+          tabs.forEach(t => t.classList.remove("active"));
+          tab.classList.add("active");
+        })
+      })
+
+      const itemIcons = document.querySelector(".item-icons");
+      let count = 10;
+
+      function renderImages(){
+        itemIcons.innerHTML = "";
+        for (let i = 0; i< count; i++){
+          const img = document.createElement("img");
+          img.src = "asset/img_correct.png";
+          itemIcons.appendChild(img);
+        }
+      }
+
+      renderImages()
+
+    </script>
   </body>
 </html>
