@@ -25,7 +25,7 @@ body {
 
 #score {
   height: 40px;
-  width: 60%;
+  width: 66%;
   margin: auto;
   display: flex;
   gap: 15px;
@@ -176,6 +176,28 @@ h4 {
   font-family: sans-serif;
 }
 
+.modal-anser-box {
+  display: flex;
+}
+
+.exp-header {
+  margin-top: 10px;
+  font-size: 18px;
+  font-family: 'PfStardust30', sans-serif;
+  color: var(--dark-green);
+}
+
+.ans-label {
+  width: 14px;
+  height: 14px;
+  font-size: 12px;
+  border-radius: 50%;
+  border: 1px solid black;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
 #explanation_text {
   font-family: sans-serif;
 }
@@ -194,6 +216,11 @@ h4 {
   align-items: center;
   font-weight: bold;
   color: var(--dark-pink);
+}
+
+#modal_explanation_text {
+  margin: 2px;
+  font-size: 14px;
 }
 
 .hidden {
