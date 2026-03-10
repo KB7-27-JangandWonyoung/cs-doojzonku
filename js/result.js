@@ -5,7 +5,7 @@
 document.addEventListener('DOMContentLoaded', () => {
   lucide.createIcons();
   // 1. 정답 정오표 가져오기
-  const result = [true, false, false, true, true, true, false, true, true, false];
+  const result = [true, true, false, true, true, true, false, true, true, false];
 
   const explanations = [
     '1번: 두쫀쿠는 빵을 정말 좋아해서 이름이 그렇게 붙었답니다.',
@@ -113,14 +113,14 @@ function updateResultUI(score, total, display, stars, title, sub, dzkImage) {
   if (score >= 7) {
     title.innerText = '✨ 환상의 팡쫀쿠! ✨';
     sub.innerText = '두쫀쿠가 요리 실력을 인정받아 행복해합니다!';
-    dzkImage.src = '/assets/happy_boy_cookie.gif';
+    dzkImage.src = 'assets/happy_boy_cookie.gif';
   } else if (score >= 5) {
     title.innerText = '음, 나쁘지 않네요.';
     sub.innerText = '조금 더 연습하면 훌륭한 팡쫀쿠가 될 거예요.';
-    dzkImage.src = '/assets/subtle_boy_cookie.gif';
+    dzkImage.src = 'assets/subtle_boy_cookie.gif';
   } else {
     title.innerText = '이건 팡쫀쿠가 아닌데..';
     sub.innerText = '너무 맛이 없어서 먹지 못하겠어요...';
-    dzkImage.src = '/assets/angry_boy_cookie.gif';
+    dzkImage.src = 'assets/angry_boy_cookie.gif';
   }
 }
