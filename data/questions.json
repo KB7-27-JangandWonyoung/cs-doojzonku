@@ -1,1 +1,154 @@
-{}
+{
+  "quizList": [
+    {
+      "id": 1,
+      "category": "JavaScript",
+      "difficulty": "easy",
+      "question": "아래 HTML 요소의 내용을 변경하기 위한 올바른 JavaScript 문법은?",
+      "code": "<p id=\"demo\">This is a demonstration.</p>",
+      "options": [
+        "document.getElementByName(\"p\").innerHTML = \"Hello World!\";",
+        "document.getElementById(\"demo\").innerHTML = \"Hello World!\";",
+        "#demo.innerHTML = \"Hello World!\";",
+        "document.getElement(\"p\").innerHTML = \"Hello World!\";"
+      ],
+      "answer": 1,
+      "userAnswer": null,
+      "explanation": "getElementById()는 특정 id를 가진 HTML 요소를 선택할 때 사용한다. id가 demo인 요소를 선택한 뒤 innerHTML로 내용을 변경할 수 있다.",
+      "characterImg": "asset/img_gred_1.png",
+      "productImg": "asset/img_gred_wrong_1.png"
+    },
+    {
+      "id": 2,
+      "category": "JavaScript",
+      "difficulty": "easy",
+      "question": "JavaScript 코드는 어떤 HTML 요소 안에 작성하나요?",
+      "code": "",
+      "options": ["<scripting>", "<js>", "<javascript>", "<script>"],
+      "answer": 3,
+      "userAnswer": null,
+      "explanation": "JavaScript 코드는 HTML 문서에서 <script> 태그 안에 작성한다. 이 태그 안에 작성된 코드는 브라우저가 JavaScript로 실행한다.",
+      "characterImg": "asset/img_gred_2.png",
+      "productImg": "asset/img_gred_wrong_2.png"
+    },
+    {
+      "id": 3,
+      "category": "JavaScript",
+      "difficulty": "easy",
+      "question": "alert 창에 \"Hello World\"를 출력하려면 어떻게 작성해야 하나요?",
+      "code": "",
+      "options": [
+        "msgBox(\"Hello World\");",
+        "alertBox(\"Hello World\");",
+        "msg(\"Hello World\");",
+        "alert(\"Hello World\");"
+      ],
+      "answer": 3,
+      "userAnswer": null,
+      "explanation": "alert() 함수는 브라우저에서 경고 팝업창을 띄울 때 사용하는 JavaScript 내장 함수이다.",
+      "characterImg": "asset/img_gred_3.png",
+      "productImg": "asset/img_gred_wrong_3.png"
+    },
+    {
+      "id": 4,
+      "category": "JavaScript",
+      "difficulty": "easy",
+      "question": "JavaScript에서 IF 문을 어떻게 작성하나요?",
+      "code": "",
+      "options": ["if i = 5 then", "if (i == 5)", "if i = 5", "if i == 5 then"],
+      "answer": 1,
+      "userAnswer": null,
+      "explanation": "JavaScript에서는 조건을 괄호로 감싸서 if (조건) 형태로 작성한다.",
+      "characterImg": "asset/img_gred_4.png",
+      "productImg": "asset/img_gred_wrong_4.png"
+    },
+    {
+      "id": 5,
+      "category": "CSS",
+      "difficulty": "normal",
+      "question": "CSS는 무엇의 약자인가?",
+      "code": "",
+      "options": [
+        "Computer Style Sheets",
+        "Creative Style Sheets",
+        "Cascading Style Sheets",
+        "Colorful Style Sheets"
+      ],
+      "answer": 2,
+      "userAnswer": null,
+      "explanation": "CSS는 Cascading Style Sheets의 약자로, HTML 요소의 색상, 크기, 레이아웃 등의 스타일을 지정하는 언어이다.",
+      "characterImg": "asset/img_gred_5.png",
+      "productImg": "asset/img_gred_wrong_5.png"
+    },
+    {
+      "id": 6,
+      "category": "CSS",
+      "difficulty": "normal",
+      "question": "HTML에서 인라인 스타일을 지정할 때 사용하는 속성은 무엇인가?",
+      "code": "<p style=\"color:red\">Hello</p>",
+      "options": ["font", "class", "style", "styles"],
+      "answer": 2,
+      "userAnswer": null,
+      "explanation": "HTML에서 요소에 직접 스타일을 적용할 때는 style 속성을 사용한다.",
+      "characterImg": "asset/img_gred_6.png",
+      "productImg": "asset/img_gred_wrong_6.png"
+    },
+    {
+      "id": 7,
+      "category": "CSS",
+      "difficulty": "normal",
+      "question": "class 이름이 'test'인 요소를 어떻게 선택하나요?",
+      "code": "",
+      "options": ["test", "#test", ".test", "*test"],
+      "answer": 2,
+      "userAnswer": null,
+      "explanation": "CSS에서 클래스 선택자는 점(.)을 사용한다. 따라서 class=\"test\" 요소는 .test로 선택한다.",
+      "characterImg": "asset/img_gred_7.png",
+      "productImg": "asset/img_gred_wrong_7.png"
+    },
+    {
+      "id": 8,
+      "category": "HTML",
+      "difficulty": "hard",
+      "question": "가장 큰 제목을 나타내는 올바른 HTML 요소는 무엇인가?",
+      "code": "",
+      "options": ["<heading>", "<h6>", "<head>", "<h1>"],
+      "answer": 3,
+      "userAnswer": null,
+      "explanation": "HTML에서 제목 태그는 h1부터 h6까지 존재하며, h1이 가장 큰 제목이다.",
+      "characterImg": "asset/img_gred_8.png",
+      "productImg": "asset/img_gred_wrong_8.png"
+    },
+    {
+      "id": 9,
+      "category": "HTML",
+      "difficulty": "hard",
+      "question": "중요한 텍스트를 정의하는 올바른 HTML 요소는 무엇인가?",
+      "code": "",
+      "options": ["<important>", "<strong>", "<b>", "<i>"],
+      "answer": 1,
+      "userAnswer": null,
+      "explanation": "<strong> 태그는 의미적으로 중요한 텍스트를 강조할 때 사용하며 보통 굵게 표시된다.",
+      "characterImg": "asset/img_gred_9.png",
+      "productImg": "asset/img_gred_wrong_9.png"
+    },
+    {
+      "id": 10,
+      "category": "HTML",
+      "difficulty": "hard",
+      "question": "이미지를 삽입하기 위한 올바른 HTML 코드는 무엇인가?",
+      "code": "",
+      "options": [
+        "<image src=\"image.jpg\">",
+        "<img src=\"image.jpg\" alt=\"image\">",
+        "<img href=\"image.jpg\">",
+        "<picture src=\"image.jpg\">"
+      ],
+      "answer": 1,
+      "userAnswer": null,
+      "explanation": "HTML에서 이미지를 삽입할 때는 img 태그를 사용하며 src 속성으로 이미지 경로를 지정한다. alt는 이미지 설명이다.",
+      "characterImg": "asset/img_gred_10.png",
+      "productImg": "asset/img_gred_wrong_10.png"
+    }
+  ]
+}
