@@ -42,7 +42,7 @@ body {
   display: flex; /* 아이콘과 텍스트를 가로로 배치 */
   align-items: center; /* 아이콘과 텍스트의 세로 중앙 정렬 */
   gap: 10px; /* 아이콘과 텍스트 사이의 간격 */
-  font-size: 12px ;
+  font-size: 12px;
   font-family: 'PfStardust30', sans-serif;
 }
 
@@ -60,16 +60,20 @@ body {
 }
 /* 3. 퀴즈 진행 상태 프로그래스바 */
 .progress-bar-container {
+  width: 100%;
   height: 10px;
   background-color: #f39eb6;
   border-radius: 30px;
+  overflow: hidden; /* 프로그래스바가 둥글게 보이도록 자식 요소가 넘치지 않게 설정 */
 }
 /* 3. 퀴즈 진행 상태 프로그래스바 채움 */
 .progress-fill {
+  display: block;
   background-color: #ff7098;
   height: 100%;
-  width: 60%;
+  width: 0%;
   border-radius: 30px;
+  transition: width 0.3s ease;
 }
 
 /* 3. 퀴즈 진행 상태 아이콘 */
@@ -79,7 +83,7 @@ body {
   height: 35px;
 }
 
-.item-icons img{
+.item-icons img {
   width: 30px;
   height: 35px;
 }
@@ -116,8 +120,8 @@ body {
 /* 5. 퀴즈  */
 .quiz-content {
   padding: 20px 25px;
-  background-color: #FFFFEE;
-  border: #F7F6DA;
+  background-color: #ffffee;
+  border: #f7f6da;
   border-radius: 20px;
   margin: 15px;
   position: relative;
@@ -189,30 +193,30 @@ body {
 
 /* 7. 클릭했을 경우 스타일 */
 .option-item.active {
-  background-color: #E1EFDE;
+  background-color: #e1efde;
   border: 2px solid #28a745;
 }
 
 /* 7. 정답일 경우의 스타일 */
 .option-item.correct {
-  background-color: #E1EFDE;
+  background-color: #e1efde;
   border: 2px solid #28a745;
 }
 
 /* 7. 오답일 경우의 스타일 */
 .option-item.wrong {
-  background-color: #FD3131;
-  border: 2px solid #DE0000;
+  background-color: #fd3131;
+  border: 2px solid #de0000;
 }
 
 /* 7. 비활성화 스타일 */
 .option-item.disabled {
-  background-color: #D9D9D9;
+  background-color: #d9d9d9;
 }
 
 /* 해설 영역 */
-.explanation-section{
-  background-color: #FFF4E6;
+.explanation-section {
+  background-color: #fff4e6;
   margin-top: 40px;
   margin-left: 15px;
   margin-right: 15px;
@@ -223,18 +227,17 @@ body {
 }
 
 /* 해설 제목 */
-.explanation-title{
+.explanation-title {
   font-size: 18px;
   font-weight: bold;
   margin-bottom: 10px;
 }
 
 /* 해설 내용 */
-.explanation-text{
+.explanation-text {
   font-size: 14px;
   color: #333;
 }
-
 
 /* 8. 하단 정답 확인 버튼 */
 #check-btn {
