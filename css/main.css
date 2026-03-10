@@ -18,7 +18,6 @@ body {
   align-items: center;
   width: 450px;
   height: 100vh;
-  padding: 20px;
   background-color: var(--mobile-bg-color);
   font-family: 'PfStardust30', sans-serif;
 }
