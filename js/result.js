@@ -6,16 +6,16 @@ document.addEventListener('DOMContentLoaded', () => {
   lucide.createIcons();
   // 1. 정답 정오표 가져오기
   const result = [
+    true,
+    true,
+    true,
     false,
     false,
     true,
     false,
     true,
     true,
-    true,
-    true,
-    true,
-    true,
+    false,
   ];
 
   const explanations = [
@@ -39,9 +39,11 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // 2. 점수 데이터 가져오기
-  // (나중에 localStorage에서 가져오게 변경 가능)
   const score = result.filter((isCorrect) => isCorrect === true).length;
   const total = 10;
+
+  // 2.1. 점수에 따른 bgm
+  playResultSound(score);
 
   const scoreElement = document.getElementById('score-text');
 
@@ -53,12 +55,21 @@ document.addEventListener('DOMContentLoaded', () => {
   // 3. 화면 요소 선택
   const scoreDisplay = document.getElementById('score-text');
   const stars = document.querySelectorAll('#stars [data-lucide="star"]');
-  const titleText = document.querySelector('#description h2');
-  const subText = document.querySelector('#description h3');
+  const titleText = document.querySelector('#description h3');
+  const subText = document.querySelector('#description h4');
   const retryBtn = document.getElementById('retry_button');
+  const dzkImage = document.querySelector('#dzk-image');
 
   // 4. 점수 반영 실행
-  updateResultUI(score, total, scoreDisplay, stars, titleText, subText);
+  updateResultUI(
+    score,
+    total,
+    scoreDisplay,
+    stars,
+    titleText,
+    subText,
+    dzkImage,
+  );
 
   // 5. 메인화면으로 복귀
   if (retryBtn) {
@@ -97,11 +108,9 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 });
 
-/**
- * 점수에 따라 UI를 업데이트하는 함수
- */
+/* 점수에 따라 UI를 업데이트하는 함수 */
 
-function updateResultUI(score, total, display, stars, title, sub) {
+function updateResultUI(score, total, display, stars, title, sub, dzkImage) {
   if (display) display.innerText = `${score}/${total}`;
 
   // 별점 채우기 (2점당 1개)
@@ -118,11 +127,49 @@ function updateResultUI(score, total, display, stars, title, sub) {
   if (score >= 7) {
     title.innerText = '✨ 환상의 팡쫀쿠! ✨';
     sub.innerText = '두쫀쿠가 요리 실력을 인정받아 행복해합니다!';
+    dzkImage.src = 'assets/happy_boy_cookie.gif';
   } else if (score >= 5) {
     title.innerText = '음, 나쁘지 않네요.';
     sub.innerText = '조금 더 연습하면 훌륭한 팡쫀쿠가 될 거예요.';
+    dzkImage.src = 'assets/subtle_boy_cookie.gif';
   } else {
     title.innerText = '이건 팡쫀쿠가 아닌데..';
     sub.innerText = '너무 맛이 없어서 먹지 못하겠어요...';
+    dzkImage.src = 'assets/angry_boy_cookie.gif';
+  }
+}
+
+/**
+ * 결과 점수에 따라 BGM을 1회 재생하는 함수
+ */
+function playResultSound(score) {
+  let sound;
+
+  // 1. 점수별 사운드 선택
+  if (score >= 7) {
+    sound = document.getElementById('bgm_success');
+  } else {
+    sound = document.getElementById('bgm_fail');
+  }
+
+  if (sound) {
+    sound.volume = 0.5; // 볼륨 조절 (0.0 ~ 1.0)
+    sound.currentTime = 0; // 혹시 모르니 처음부터 재생되도록 초기화
+
+    // 2. 재생 시도
+    const playPromise = sound.play();
+
+    if (playPromise !== undefined) {
+      playPromise.catch((error) => {
+        console.log('사운드 재생 대기 중...');
+        document.body.addEventListener(
+          'click',
+          () => {
+            sound.play();
+          },
+          { once: true },
+        );
+      });
+    }
   }
 }
