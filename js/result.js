@@ -2,34 +2,44 @@
     점수 표시, 다시 하기 로직
 */
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
   lucide.createIcons();
   // 1. 정답 정오표 가져오기
-  const result = [
-    true,
-    true,
-    true,
-    true,
-    true,
-    true,
-    false,
-    true,
-    true,
-    false,
-  ];
+  const rawData = localStorage.getItem('quizResults');
+  const quizResult = JSON.parse(rawData);
+  const result = [];
 
-  const explanations = [
-    '1번: 두쫀쿠는 빵을 정말 좋아해서 이름이 그렇게 붙었답니다.',
-    '2번: 이 문제는 함정이었어요! 사실 정답은...2 Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione quod velit voluptatum praesentium optio commodi illo quae libero eaque eligendi corporis exercitationem aperiam eius et quam minus tempora corrupti omnis ab, quaerat sunt earum. Tempore repellendus, exercitationem incidunt culpa at doloribus omnis hic molestias facere quasi ipsa deserunt tempora corporis',
-    '3번: 이 문제는 함정이었어요!\n 해설: color는 글자색을 바꿀 때 사용하며, 배경색을 바꿀 때는 background-color 속성을 사용해야 합니다.',
-    '4번: 이 문제는 함정이었어요!\n 해설: 시각적인 차이는 없을지 몰라도, **웹 접근성(Accessibility)**과 SEO(검색 엔진 최적화) 측면에서 매우 중요합니다. 스크린 리더가 웹 페이지 구조를 파악하거나 검색 엔진이 핵심 내용을 수집할 때 <div>만 가득한 코드보다 <main>, <article>, <section> 등이 잘 짜인 코드를 훨씬 높게 평가합니다.',
-    '5번: 이 문제는 함정이었어요! 사실 정답은...5',
-    '6번: 이 문제는 함정이었어요! 사실 정답은...6',
-    '7번: 이 문제는 함정이었어요! 사실 정답은...7',
-    '8번: 이 문제는 함정이었어요! 사실 정답은...8',
-    '9번: 이 문제는 함정이었어요! 사실 정답은...9',
-    '10번: 이 문제는 함정이었어요! 사실 정답은...10',
-  ];
+  let explanations = [];
+  let questionsData = [];
+
+  try {
+    const response = await fetch('./data/questions.json');
+    questionsData = await response.json();
+  } catch (error) {
+    console.error('데이터를 불러오는 도중 오류 발생: ', error);
+  }
+
+  const quizList = questionsData.quizList;
+  console.log(quizList);
+
+  for (let question of quizResult) {
+    result.push(question.isCorrect);
+    const matchedQuestion = quizList.find((q) => q.id === question.id);
+
+    if (matchedQuestion) {
+      explanations.push({
+        answerNumber: matchedQuestion.answer,
+        id: matchedQuestion.id,
+        category: matchedQuestion.category,
+        difficulty: matchedQuestion.difficulty,
+        question: matchedQuestion.question,
+        answer: matchedQuestion.options[matchedQuestion.answer], // 인덱스를 사용해 실제 정답 텍스트 추출
+        explanation: matchedQuestion.explanation,
+      });
+    }
+  }
+
+  console.log(explanations);
 
   const quizItems = document.querySelectorAll('.quiz-item');
 
@@ -80,16 +90,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 6. 각 문제 해설 보기
   const modal = document.getElementById('modal_overlay');
-  const expText = document.getElementById('explanation_text');
   const modalTitle = document.getElementById('modal_title');
   const closeBtn = document.getElementById('close_modal');
 
+  const answerCode = document.getElementById('modal_answer_code');
+  const explanationText = document.getElementById('modal_explanation_text');
+
   quizItems.forEach((item, index) => {
     item.addEventListener('click', () => {
-      // 내용 채우기
-      modalTitle.innerText = `${index + 1}번 문제 해설`;
-      expText.innerText = explanations[index] || '해설 준비 중입니다!';
+      const data = explanations[index];
+      const isCorrect = result[index];
 
+      // 1. 제목 및 배너 설정
+      modalTitle.innerText = `${data.id}번 문제 해설`;
+
+      // 3. 문제 및 정답 (innerText를 써야 HTML 태그가 글자로 나옵니다!)
+      answerCode.innerText = data.answerNumber + '. ' + data.answer;
+
+      // 4. 해설
+      explanationText.innerText = data.explanation;
       // 모달 보이기
       modal.classList.remove('hidden');
     });
