@@ -129,7 +129,7 @@ confirmBtn.onclick = () => {
     isCorrect: isCorrect,
   });
 
-  addIngredientIcon(correctCount);
+  addIngredientIcon(isCorrect);
 
   // 4번: 토스트 메시지 출력
   if (isCorrect) {
@@ -184,7 +184,7 @@ function addIngredientIcon(isCorrect) {
   const img = document.createElement('img');
 
   // 맞으면 성공 이미지, 틀리면 실패 이미지
-  img.src = isCorrect ? 'assets/img_correct.png' : 'assets/img_wrong.png';
+  img.src = isCorrect ? 'asset/img_correct.png' : 'asset/img_wrong.png';
 
   img.style.width = '30px';
   img.style.marginRight = '5px';
