@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>팡쫀쿠 만들기</title>
     <link rel="stylesheet" href="css/common.css" />
     <link rel="stylesheet" href="css/result.css" />
   </head>
@@ -23,11 +23,15 @@
         </div>
       </div>
       <div id="description">
-        <h3>이건 팡쫀쿠가 아닌데..</h3>
-        <h4>너무 맛이 없어서 먹지 못하겠어요...</h4>
+        <h3>과연..</h3>
+        <h4>결과는...</h4>
       </div>
       <div id="dzk-image-container">
-        <img id="dzk-image" src="" alt="" />
+        <img
+          id="dzk-image"
+          src="./assets/subtle_boy_cookie.gif"
+          alt="완성된 두쫀쿠는..."
+        />
       </div>
       <div id="questions">
         <h3>들어간 재료들</h3>
@@ -49,6 +53,11 @@
         <i data-lucide="rotate-ccw"></i>
         <div>다시 도전하기</div>
       </div>
+    </div>
+    <!-- 효과음 -->
+    <div id="audio_container" style="display: none">
+      <audio id="bgm_success" src="assets/victory_bgm.mp3"></audio>
+      <audio id="bgm_fail" src="assets/fail_bgm.mp3"></audio>
     </div>
     <!--  모달 - 얘는 쓸 수도 있고 안 쓸 수도 있고 -->
     <div id="modal_overlay" class="hidden">
