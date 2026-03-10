@@ -1,6 +1,6 @@
 // 정답 확인 로직
-export function checkIsCorrent(selectedIndex, correctIndex) {
-    return selectedIndez === correctIndex;
+export function checkIsCorrect(selectedIndex, correctIndex) {
+    return selectedIndex === correctIndex;
 }
 
 // 진행률 계산 로직
