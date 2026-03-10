@@ -161,33 +161,19 @@ function updateResultUI(score, total, display, stars, title, sub, dzkImage) {
  * 결과 점수에 따라 BGM을 1회 재생하는 함수
  */
 function playResultSound(score) {
-  let sound;
+  const soundId = score >= 7 ? 'bgm_success' : 'bgm_fail';
+  const sound = document.getElementById(soundId);
+  
+  if (!sound) return;
 
-  // 1. 점수별 사운드 선택
-  if (score >= 7) {
-    sound = document.getElementById('bgm_success');
-  } else {
-    sound = document.getElementById('bgm_fail');
-  }
+  sound.volume = 0.5;
 
-  if (sound) {
-    sound.volume = 0.5; // 볼륨 조절 (0.0 ~ 1.0)
-    sound.currentTime = 0; // 혹시 모르니 처음부터 재생되도록 초기화
+  sound.play().catch(() => {
 
-    // 2. 재생 시도
-    const playPromise = sound.play();
-
-    if (playPromise !== undefined) {
-      playPromise.catch((error) => {
-        console.log('사운드 재생 대기 중...');
-        document.body.addEventListener(
-          'click',
-          () => {
-            sound.play();
-          },
-          { once: true },
-        );
-      });
-    }
-  }
+  
+    console.log("자동 재생 차단됨 -> 클릭 대기 중");
+    window.addEventListener('click', () => sound.play(), { once: true });
+  });
 }
+
+window.onload = () => playResultSound(score);
