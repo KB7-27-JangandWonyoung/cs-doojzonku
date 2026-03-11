@@ -1,8 +1,8 @@
 /* 메인 페이지 전용 */
+const bgm = new Audio('assets/bgm.mp3'); // 배경음악
+bgm.loop = true;
 
 window.onload = function () {
-  var bgm = new Audio('../assets/main-bgm.mp3');
-  bgm.loop = true;
   bgm.play().catch(() => {
     // 브라우저 정책상 자동재생 차단 시, 첫 클릭 때 재생 시작
     window.addEventListener('click', () => bgm.play(), { once: true });
