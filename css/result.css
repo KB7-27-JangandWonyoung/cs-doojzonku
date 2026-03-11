@@ -100,16 +100,34 @@ body {
   border-radius: 10px;
 }
 
+.quiz-item:hover {
+  background-color: var(--dark-green);
+}
+
 /* 맞았을 때 */
 .quiz-item.correct {
   background-color: var(--light-green);
   color: var(--dark-green);
 }
 
+.quiz-item.correct:hover {
+  background-color: var(--primary-green); 
+  color: white;
+  transform: translateY(-3px);
+  cursor: pointer;
+}
+
 /* 틀렸을 때 */
 .quiz-item.incorrect {
   background-color: var(--dark-pink);
   color: var(--light-brown);
+}
+
+.quiz-item.incorrect:hover {
+  background-color: #e67070; 
+  color: var(--light-brown);
+  transform: translateY(-3px);
+  cursor: pointer;
 }
 
 h3 {
