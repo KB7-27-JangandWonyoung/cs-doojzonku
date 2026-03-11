@@ -3,6 +3,7 @@
 body {
   background-color: #f7f6d3;
   margin: 0; /* 브라우저 기본 여백 제거 */
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -11,12 +12,12 @@ body {
 /* 2. 가로 540px 고정 모바일 뷰 컨테이너 */
 .mobile-container {
   width: 450px;
-  height: 100vh;
+  height: 100%;
   background-color: #fffee4;
   display: flex;
   flex-direction: column; /* 내부 요소들을 위에서 아래로(세로) 쌓음 */
   position: relative; /* 자식 요소 중 absolute 배치가 있을 경우 기준점이 됨 */
-  overflow-y: auto; /* 내용이 화면보다 길어지면 세로 스크롤 생성 */
+  padding-bottom: 3%;
 }
 .mobile-container::-webkit-scrollbar {
   display: none; /* 스크롤바 영역 자체를 보이지 않게 설정 */
