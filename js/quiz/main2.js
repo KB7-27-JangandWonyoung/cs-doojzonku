@@ -7,6 +7,11 @@ let correctCount = 0;
 let userResults = []; 
 let timerId = null;
 
+// 🎵 오디오 객체 설정
+const bgm = new Audio('assets/main-bgm.mp3'); // 배경음악
+bgm.loop = true;
+const clickSound = new Audio('assets/click-sound.mp3'); // 클릭 효과음
+
 const goodIngredients = ['카다이프', '피스타치오', '올리브오일', '화이트초콜릿', '마시멜로우', '버터', '약불', '코코아 파우더', '코코아 가루 묻히기', '마시멜로우 잘 감싸기'];
 const badIngredients = ['소면', '고추냉이', '참기름', '두부', '엿', '바나나', '강불', '흑임자가루', '코코아 가루 폭발', '반죽 분해'];
 
@@ -23,13 +28,18 @@ const productImg = document.querySelector('.product-image img');
 const explanationSection = document.querySelector('.explanation-section');
 const explanationText = document.querySelector('.explanation-text');
 
-// [타이머 함수] 시간 초과 시 handleResult를 직접 실행
+// 🔊 효과음 재생 함수 (연속 클릭 시 소리가 겹치도록 초기화 포함)
+function playEffect() {
+    clickSound.currentTime = 0;
+    clickSound.play();
+}
+
+// [타이머 함수]
 function timeAttack() {
     let timeLeft = 10;
-    const timeDisplay = document.querySelector('.quiz-header .info-box:last-child div'); 
+    const timeDisplay = document.querySelectorAll('.info-box div')[1]; 
     
     if (timeDisplay) timeDisplay.innerHTML = `남은 시간<br />${timeLeft} 초`;
-    
     if (timerId) clearInterval(timerId);
 
     timerId = setInterval(() => {
@@ -38,7 +48,6 @@ function timeAttack() {
         
         if (timeLeft <= 0) {
             stopTimer();
-            // 선지를 고르지 않았더라도 결과 처리 함수로 바로 진입
             handleResult(); 
         }
     }, 1000);
@@ -51,8 +60,17 @@ function stopTimer() {
     }
 }
 
-// 1. 초기화
+// 1. 초기화 (BGM 자동 재생 로직 포함)
 async function init() {
+    // 이전 페이지에서 음악이 켜져 있었다면 재생 (기본값 on)
+    const bgmStatus = localStorage.getItem('bgmStatus') || 'on';
+    if (bgmStatus === 'on') {
+        bgm.play().catch(() => {
+            // 브라우저 정책상 자동재생 차단 시, 첫 클릭 때 재생 시작
+            window.addEventListener('click', () => bgm.play(), { once: true });
+        });
+    }
+
     try {
         const response = await fetch('./data/questions.json');
         const data = await response.json();
@@ -74,7 +92,6 @@ function loadQuestion() {
     confirmBtn.textContent = '정답 확인하기';
     explanationSection.style.display = 'none';
 
-    // 타이머 시작
     timeAttack();
 
     ingredientCountText.innerHTML = `재료<br />${currentIndex + 1} / ${quizData.length}`;
@@ -97,8 +114,10 @@ function loadQuestion() {
         btn.querySelector('.option-text').textContent = currentQuiz.options[idx];
         btn.classList.remove('active', 'correct', 'wrong', 'disabled');
         btn.disabled = false;
-        btn.style.color = 'black'; // 글자색 초기화
+        btn.style.color = 'black';
+        
         btn.onclick = () => {
+            playEffect(); // ✅ 선지 클릭 효과음
             optionButtons.forEach((b) => b.classList.remove('active'));
             btn.classList.add('active');
             selectedOptionIndex = idx;
@@ -108,7 +127,8 @@ function loadQuestion() {
 
 // 3. 버튼 클릭 이벤트
 confirmBtn.onclick = () => {
-    // 이미 결과 확인 후 '다음' 버튼인 경우
+    playEffect(); // ✅ 버튼 클릭 효과음
+
     if (confirmBtn.textContent === '다음 문제로 이동') {
         currentIndex++;
         if (currentIndex < quizData.length) {
@@ -121,36 +141,28 @@ confirmBtn.onclick = () => {
         return;
     }
 
-    // 아직 문제를 풀지 않았는데 버튼을 누른 경우
     if (selectedOptionIndex === null) {
         alert('정답을 골라주세요!');
         return;
     }
 
-    // 정상 클릭 시 타이머 중지 후 결과 처리
     stopTimer();
     handleResult();
 };
 
-// [핵심] 결과 처리 로직 (버튼 클릭 & 시간 초과 공용)
+// [핵심] 결과 처리 로직
 function handleResult() {
     const currentQuiz = quizData[currentIndex];
-    
-    // selectedOptionIndex가 null이면 checkIsCorrect는 false를 반환함
     const isCorrect = selectedOptionIndex !== null && checkIsCorrect(selectedOptionIndex, currentQuiz.answer);
 
-    userResults.push({
-        id: currentQuiz.id,
-        isCorrect: isCorrect,
-    });
-
+    userResults.push({ id: currentQuiz.id, isCorrect: isCorrect });
     addIngredientIcon(isCorrect);
 
     if (isCorrect) {
         correctCount++;
         showToast(`✨ ${goodIngredients[currentIndex % 10]} 추가!`, true);
     } else {
-        const msg = selectedOptionIndex === null ? `⏰시간 초과! 🤢${badIngredients[currentIndex % 10]} 투입...` : `🤢 ${badIngredients[currentIndex % 10]} 투입...`;
+        const msg = selectedOptionIndex === null ? `⏰ 시간 초과! 🤢 ${badIngredients[currentIndex % 10]} 투입...` : `🤢 ${badIngredients[currentIndex % 10]} 투입...`;
         showToast(msg, false);
     }
 
@@ -160,11 +172,10 @@ function handleResult() {
     optionButtons.forEach((btn, idx) => {
         btn.disabled = true;
         btn.style.color = 'black'; 
-        
         if (idx === currentQuiz.answer) {
-            btn.classList.add('correct'); // 정답 표시
+            btn.classList.add('correct');
         } else if (idx === selectedOptionIndex && !isCorrect) {
-            btn.classList.add('wrong'); // 선택한 오답 표시
+            btn.classList.add('wrong');
         } else {
             btn.classList.add('disabled');
         }
@@ -181,7 +192,7 @@ function showToast(message, isGood) {
     Object.assign(toast.style, {
         position: 'fixed', bottom: '150px', left: '50%', transform: 'translateX(-50%)',
         backgroundColor: isGood ? '#28a745' : '#dc3545', color: 'white',
-        padding: '10px 20px', borderRadius: '20px', zIndex: '1000'
+        padding: '12px 24px', borderRadius: '30px', zIndex: '1000', transition: 'all 0.5s'
     });
     document.body.appendChild(toast);
 
