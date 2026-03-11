@@ -8,6 +8,18 @@ document.addEventListener('DOMContentLoaded', async () => {
   const rawData = localStorage.getItem('quizResults');
   const quizResult = JSON.parse(rawData);
   const result = [];
+  const ingredients = [
+    ['고소한 카다이프', '잔치국수 소면'],
+    ['고급st 피스타치오', '코가 뻥 고추냉이'],
+    ['이태리 오일', '엄마표 참기름'],
+    ['달콤한 화이트 초콜릿', '다이어트 두부'],
+    ['퐁신 마시멜로우', '딱딱한 엿가락'],
+    ['5만원 버터', '5천원 바나나'],
+    ['마시멜로우를 녹여요', '마시멜로우를 태워요'],
+    ['달고 쓴 코코아파우더', '텁텁한 흑임자 가루'],
+    ['코코아 파우더 묻히기', '재채기로 파우더 날려버리기'],
+    ['예쁘고 둥글게 피 감싸기', '피가 다 터져버린 두쫀쿠'],
+  ];
 
   let explanations = [];
   let questionsData = [];
@@ -38,12 +50,13 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   }
 
-
   const quizItems = document.querySelectorAll('.quiz-item');
 
   quizItems.forEach((item, index) => {
     const isCorrect = result[index];
     item.classList.add(isCorrect ? 'correct' : 'incorrect');
+    // 여기 고치면 될 듯.
+    item.innerText = `${isCorrect ? ingredients[index][0] : ingredients[index][1]}`;
   });
 
   // 2. 점수 데이터 가져오기
@@ -163,15 +176,13 @@ function updateResultUI(score, total, display, stars, title, sub, dzkImage) {
 function playResultSound(score) {
   const soundId = score >= 7 ? 'bgm_success' : 'bgm_fail';
   const sound = document.getElementById(soundId);
-  
+
   if (!sound) return;
 
   sound.volume = 0.5;
 
   sound.play().catch(() => {
-
-  
-    console.log("자동 재생 차단됨 -> 클릭 대기 중");
+    console.log('자동 재생 차단됨 -> 클릭 대기 중');
     window.addEventListener('click', () => sound.play(), { once: true });
   });
 }
