@@ -39,6 +39,7 @@ const badIngredients = [
 
 // HTML 요소 선택
 const questionText = document.querySelector('.question');
+const questionCategory = document.querySelector('.badge');
 const codeBlock = document.querySelector('.code-box code');
 const optionButtons = document.querySelectorAll('.option-item');
 const confirmBtn = document.querySelector('#check-btn');
@@ -118,6 +119,7 @@ function loadQuestion() {
 
   ingredientCountText.innerHTML = `재료<br />${currentIndex + 1} / ${quizData.length}`;
   questionText.textContent = currentQuiz.question;
+  questionCategory.textContent = `</> ${currentQuiz.category}`;
 
   const codeBox = document.querySelector('.code-box');
   if (currentQuiz.code) {
