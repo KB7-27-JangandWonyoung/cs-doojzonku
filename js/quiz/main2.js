@@ -62,13 +62,20 @@ function timeAttack() {
   let timeLeft = 10;
   const timeDisplay = document.querySelectorAll('.info-box div')[1];
 
-  if (timeDisplay) timeDisplay.innerHTML = `남은 시간<br />${timeLeft} 초`;
+  if (timeDisplay) {
+    timeDisplay.innerHTML = `남은 시간<br />${timeLeft} 초`;
+    timeDisplay.style.lineHeight = '1.2';
+  }
+
   if (timerId) clearInterval(timerId);
 
   timerId = setInterval(() => {
     timeLeft--;
     if (timeDisplay) timeDisplay.innerHTML = `남은 시간<br />${timeLeft} 초`;
-
+    if (timeLeft <= 4) {
+      timeDisplay.innerHTML = `남은 시간<br /><a style="color: red; font-weight: bold;">${timeLeft}</a> 초`;
+      timeDisplay.style.lineHeight = '1.2';
+    }
     if (timeLeft <= 0) {
       stopTimer();
       handleResult();
@@ -117,7 +124,8 @@ function loadQuestion() {
   confirmBtn.disabled = true;
   timeAttack();
 
-  ingredientCountText.innerHTML = `재료<br />${currentIndex + 1} / ${quizData.length}`;
+  ingredientCountText.innerHTML = `재료<br /><a style="color: var(--primary-pink); font-weight: bold;">${currentIndex + 1}</a> / ${quizData.length}`;
+  ingredientCountText.style.lineHeight = '1.2';
   questionText.textContent = currentQuiz.question;
   questionCategory.textContent = `</> ${currentQuiz.category}`;
 

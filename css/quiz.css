@@ -36,6 +36,8 @@ body {
 
 /* 4. 헤더 안의 개별 갈색 박스 */
 .info-box {
+  box-shadow: 0px 2px 2px rgba(62, 61, 61, 0.25);
+
   background-color: #5d4007;
   color: white;
   padding: 15px 15px;
@@ -64,6 +66,8 @@ body {
   width: 100%;
   height: 10px;
   background-color: #f39eb6;
+  box-shadow: 0px 1px 1px rgba(250, 95, 95, 0.25);
+
   border-radius: 30px;
   overflow: hidden; /* 프로그래스바가 둥글게 보이도록 자식 요소가 넘치지 않게 설정 */
 }
@@ -173,6 +177,8 @@ body {
   height: 40px;
   width: 100%;
   background-color: #ff769b;
+  box-shadow: 0px 1px 1px rgba(55, 54, 54, 0.25);
+
   margin-bottom: 10px;
   border-radius: 25px;
   padding-left: 12px;
