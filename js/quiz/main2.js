@@ -114,7 +114,7 @@ function loadQuestion() {
   selectedOptionIndex = null;
   confirmBtn.textContent = '정답 확인하기';
   explanationSection.style.display = 'none';
-
+  confirmBtn.disabled = true;
   timeAttack();
 
   ingredientCountText.innerHTML = `재료<br />${currentIndex + 1} / ${quizData.length}`;
@@ -146,7 +146,6 @@ function loadQuestion() {
       btn.classList.add('active');
       selectedOptionIndex = idx;
       confirmBtn.disabled = false;
-      confirmBtn.style.backgroundColor = 'var(--dark-brown)';
     };
   });
 }
@@ -160,8 +159,6 @@ confirmBtn.onclick = () => {
     if (currentIndex < quizData.length) {
       loadQuestion();
       window.scrollTo(0, 0);
-      confirmBtn.disabled = true;
-      confirmBtn.style.backgroundColor = '#d1d1d1';
     } else {
       localStorage.setItem('quizResults', JSON.stringify(userResults));
       location.href = 'result.html';
@@ -197,7 +194,6 @@ function handleResult() {
   explanationText.textContent = currentQuiz.explanation;
   explanationSection.style.display = 'block';
   confirmBtn.disabled = false;
-  confirmBtn.style.backgroundColor = 'var(--dark-brown)';
 
   optionButtons.forEach((btn, idx) => {
     btn.disabled = true;

@@ -258,7 +258,7 @@ body {
 #check-btn {
   width: 380px;
   height: 60px;
-  background-color: #d1d1d1;
+  background-color: var(--dark-brown);
   /* position: fixed;
   bottom: 20px;
   left: 50%;
@@ -276,5 +276,14 @@ body {
 }
 
 #check-btn:disabled {
+  background-color: #d1d1d1;
+  transform: none;
+  box-shadow: none;
+
   cursor: not-allowed;
+}
+#check-btn:disabled:hover {
+  background-color: #d1d1d1;
+  transform: none;
+  box-shadow: none;
 }
