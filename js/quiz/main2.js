@@ -143,6 +143,8 @@ function loadQuestion() {
       optionButtons.forEach((b) => b.classList.remove('active'));
       btn.classList.add('active');
       selectedOptionIndex = idx;
+      confirmBtn.disabled = false;
+      confirmBtn.style.backgroundColor = 'var(--dark-brown)';
     };
   });
 }
@@ -156,15 +158,12 @@ confirmBtn.onclick = () => {
     if (currentIndex < quizData.length) {
       loadQuestion();
       window.scrollTo(0, 0);
+      confirmBtn.disabled = true;
+      confirmBtn.style.backgroundColor = '#d1d1d1';
     } else {
       localStorage.setItem('quizResults', JSON.stringify(userResults));
       location.href = 'result.html';
     }
-    return;
-  }
-
-  if (selectedOptionIndex === null) {
-    alert('정답을 골라주세요!');
     return;
   }
 
@@ -195,6 +194,8 @@ function handleResult() {
 
   explanationText.textContent = currentQuiz.explanation;
   explanationSection.style.display = 'block';
+  confirmBtn.disabled = false;
+  confirmBtn.style.backgroundColor = 'var(--dark-brown)';
 
   optionButtons.forEach((btn, idx) => {
     btn.disabled = true;

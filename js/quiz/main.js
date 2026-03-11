@@ -7,7 +7,7 @@ let totalScore = 0;
 
 // 게임 시작 함수
 function initGame() {
-  console.log("🎮 퀴즈 게임을 시작합니다!");
+  console.log('🎮 퀴즈 게임을 시작합니다!');
   loadQuestion();
 }
 
@@ -15,17 +15,19 @@ function initGame() {
 function loadQuestion() {
   const currentQuiz = quizData[currentIndex];
   console.log(`--- 문제 ${currentIndex + 1} ---`);
-  console.log("질문:", currentQuiz.question);
-  console.log("진행도:", getProgress(currentIndex, quizData.length), "%");
+  console.log('질문:', currentQuiz.question);
+  console.log('진행도:', getProgress(currentIndex, quizData.length), '%');
 
   // 타이머 시작 (10초)
   const timer = new QuizTimer(
-    10, 
-    (time) => console.log(`남은 시간: ${time}초`), 
+    10,
+    (time) => console.log(`남은 시간: ${time}초`),
     () => {
-      console.log("시간 초과!");
+      console.log('시간 초과!');
+      const confirmBtn = document.querySelector('#check-btn');
+      confirmBtn.disabled = false;
       nextStep();
-    }
+    },
   );
   timer.start();
 }
@@ -35,9 +37,9 @@ function handleSelect(index) {
   const isCorrect = calculateScore(index, quizData[currentIndex].answer);
   if (isCorrect) {
     totalScore += 10;
-    console.log("정답입니다! 현재 점수:", totalScore);
+    console.log('정답입니다! 현재 점수:', totalScore);
   } else {
-    console.log("오답입니다.");
+    console.log('오답입니다.');
   }
   nextStep();
 }
@@ -47,7 +49,7 @@ function nextStep() {
   if (currentIndex < quizData.length) {
     loadQuestion();
   } else {
-    console.log("모든 문제를 풀었습니다! 최종 점수:", totalScore);
+    console.log('모든 문제를 풀었습니다! 최종 점수:', totalScore);
   }
 }
 

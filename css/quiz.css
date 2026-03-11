@@ -248,7 +248,7 @@ body {
 #check-btn {
   width: 380px;
   height: 60px;
-  background-color: #5d4007;
+  background-color: #d1d1d1;
   /* position: fixed;
   bottom: 20px;
   left: 50%;
@@ -260,4 +260,8 @@ body {
   font-weight: 700;
   z-index: 2;
   font-family: 'PfStardust30', sans-serif;
+}
+
+#check-btn:disabled {
+  cursor: not-allowed;
 }
