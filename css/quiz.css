@@ -123,7 +123,7 @@ body {
   background-color: #ffffee;
   border: #f7f6da;
   border-radius: 20px;
-  margin: 15px;
+  margin: 0px 15px;
   position: relative;
 }
 
@@ -149,7 +149,7 @@ body {
 /* 코드 박스 (연분홍 배경) */
 .code-box {
   background-color: #fff0f5; /* 아주 연한 분홍색 */
-  height: 20px;
+  /* height: 20px; */
   padding: 10px;
   border-radius: 20px;
   border: 1px solid #ffdae9;
@@ -217,10 +217,9 @@ body {
 /* 해설 영역 */
 .explanation-section {
   background-color: #fff4e6;
-  margin-top: 40px;
   margin-left: 15px;
   margin-right: 15px;
-  margin-bottom: 100px;
+  margin-bottom: 20px;
   padding-left: 20px;
   padding-right: 20px;
   border-radius: 20px;
@@ -240,14 +239,20 @@ body {
 }
 
 /* 8. 하단 정답 확인 버튼 */
+.quiz-bottom {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 #check-btn {
   width: 380px;
   height: 60px;
   background-color: #5d4007;
-  position: fixed;
+  /* position: fixed;
   bottom: 20px;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(-50%); */
   color: white;
   border: none;
   border-radius: 30px;
